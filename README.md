@@ -1,38 +1,30 @@
-# kali-linux-TP-link-version-2
-!Use these commands to get the adapter working on Kali for packet injection and monitoring:
-!Commands:
-==========
-sudo apt update
-sudo apt upgrade
-sudo apt install bc
-sudo apt-get install build-essential 
-sudo apt-get install libelf-dev 
+lsusb - Lists known USB devices.
 
-!Try either of these commands to see which works:
-sudo apt-get install linux-headers-`uname -r`
-sudo apt-get install linux-headers-5.10.0-kali6-amd64
+dmesg -w - Shows real-time log messages. 
 
-sudo apt install dkms
-sudo rmmod r8188eu.ko
-git clone https://github.com/aircrack-ng/rtl8188eus
-cd rtl8188eus
-sudo -i
-echo "blacklist r8188eu" > "/etc/modprobe.d/realtek.conf"
-exit
-sudo reboot
-sudo apt update
-cd rtl8188eus
-sudo make
-sudo make install
-sudo modprobe 8188eu
+ifconfig - Shows network interface information.
+or...
+ip addr show… does the same thing. 
+
+ifconfig eth0 down - Shuts down eth0 network interface. Use ‘up’ to bring it up.
+or.....
+ip link set eth0 down… does the same thing. 
+
+ifconfig wlan0 down - Shuts down wlan0 WIFI network interface. Use ‘up’ to bring it up.
+or......
+ip link set wlan0 down… does the same thing. 
+
+apt-get update - Updates Kali Linux. 
+
+apt-get upgrade - Applies Kali Linux updates. 
+
+init 6 - Reboots Kali Linux. 
+
+apt-get install realtek-rtl8188eus-dkms  - Installs driver.
+
+iw dev - Shows WIFI interface information.
+
+iw wlan0 set monitor control - Sets interface into monitor (promiscuous) mode. 
 
 
-!To enable Monitor mode and test packet injection:
-!=================================================
-sudo ifconfig wlan0 down
-sudo airmon-ng check kill
-sudo iwconfig wlan0 mode monitor
-sudo ifconfig wlan0 up
-iwconfig                             
-sudo aireplay-ng --test wlan0
 
